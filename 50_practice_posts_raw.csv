@@ -1,0 +1,32 @@
+Post_ID,Post_Text,Original_Label,Original_Flag,Audit_Status,Failed_Criteria,Issue_Summary
+1,Do you have this phone in black? Price pls,Spam,No,Fail,"C1, C4",Inquiry mislabeled as Spam
+2,Amazing food and fast service at your Accra branch,Praise,No,Pass,-,Genuine praise
+3,Still no refund after 10 days. This is theft,Complaint,No,Fail,C3,Unresolved 10-day refund requires Flag: Yes
+4,The delivery guy was so polite. Well done,Praise,No,Pass,-,Genuine praise
+5,I was debited but the transaction failed. Please sort this out,Complaint,No,Fail,C3,Debited on failed transaction requires Flag: Yes
+6,Forex signals guaranteed profit join my group,Spam,No,Pass,-,Commercial spam
+7,My package arrived broken. Very disappointed,Complaint,No,Pass,-,Standard complaint
+8,How do I check my airtime balance?,Inquiry,No,Pass,-,Standard inquiry
+9,Can I get a student discount?,Inquiry,No,Pass,-,Standard inquiry
+10,Best network in the country, calls are crystal clear,Praise,No,Pass,-,Genuine praise
+11,Follow me back and I follow back #followforfollow,Spam,No,Pass,-,Engagement spam
+12,Shout out to the agent at the Nairobi shop, very helpful,Praise,No,Pass,-,Genuine praise
+13,Thank you for the quick refund, great service!,Praise,No,Pass,-,Genuine praise
+14,Why is my data finishing so fast?? I only opened WhatsApp,Inquiry,No,Pass,-,Standard inquiry
+15,My card no work!! I can't even buy airtime. Fix this now,Complaint,No,Fail,C3,Payment card outage requires Flag: Yes
+16,Buy followers 1000 for 2000 naira,Spam,No,Pass,-,Commercial spam
+17,Can I pay my electricity bill through your app?,Inquiry,No,Pass,-,Standard inquiry
+18,Network is rubbish today, can't even load a page,Complaint,No,Pass,-,Standard complaint
+19,How much is the monthly fee for the savings account?,Inquiry,No,Pass,-,Standard inquiry
+20,Cheap iPhone 15, only 50k,WhatsApp me,Spam,No,Pass,-,Commercial spam
+21,Check out my new song!!! link in bio,Spam,No,Pass,-,Self-promotional spam
+22,Abeg, how I go take change my PIN?,Inquiry,No,Pass,-,Pidgin inquiry parsed correctly
+23,God bless you all, promote my page pls,Praise,No,Fail,"C1, C4",Promotional spam mislabeled as Praise
+24,My money don enter their account but not mine. Wetin dey happen?,Inquiry,No,Fail,"C1, C2, C3",Pidgin complaint misread as inquiry; missing urgent flag
+25,Quick and easy registration, well done,Praise,No,Pass,-,Genuine praise
+26,Is the new data bundle available in Kumasi?,Inquiry,No,Pass,-,Standard inquiry
+27,Your support team solved my issue in 5 minutes. Respect,Praise,No,Pass,-,Genuine praise
+28,Third day without network in my area and nobody is replying to me,Complaint,No,Fail,C3,3-day blackout requires Flag: Yes
+29,WIN FREE AIRTIME!!! Click bit.ly/xxxx now,Spam,No,Pass,-,Phishing spam
+30,What time does the branch open on Saturday?,Inquiry,No,Pass,-,Standard inquiry
+31,Finally a bank that listens.
