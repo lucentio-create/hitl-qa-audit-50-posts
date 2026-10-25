@@ -7,8 +7,8 @@ Post_ID,Post_Text,Original_Label,Original_Flag,Audit_Status,Failed_Criteria,Issu
 6,Forex signals guaranteed profit join my group,Spam,No,Pass,-,Commercial spam
 7,My package arrived broken. Very disappointed,Complaint,No,Pass,-,Standard complaint
 8,How do I check my airtime balance?,Inquiry,No,Pass,-,Standard inquiry
-9,Can I get a student discount?,Inquiry,No,Pass,-,Standard inquiry
-10,Best network in the country, calls are crystal clear,Praise,No,Pass,-,Genuine praise
+9,Can I get a student discount?,Pass,Inquiry,C1,None,Clean
+10,Best network in the country calls are great,Pass,Praise,C1,None,Clean
 11,Follow me back and I follow back #followforfollow,Spam,No,Pass,-,Engagement spam
 12,Shout out to the agent at the Nairobi shop, very helpful,Praise,No,Pass,-,Genuine praise
 13,Thank you for the quick refund, great service!,Praise,No,Pass,-,Genuine praise
