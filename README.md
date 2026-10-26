@@ -1,62 +1,51 @@
 # hitl-qa-audit-benchmark
-A 6-criteria Human-in-the-Loop (HITL) QA framework and audit benchmark evaluating AI text classification, urgency escalation flags, and Pidgin English parsing on social media posts.
-## 🎯 Audit Framework & Evaluation Taxonomy
 
-Each post is evaluated against six standardized quality criteria (C1–C6):
+A human QA audit of 50 labelled social media posts, using a 6-point checklist.
 
-| ID | Criteria Name | Description & Evaluation Logic |
-| :---: | :--- | :--- |
-| **C1** | Intent Classification | Validates if the assigned label (Complaint, Inquiry, Praise, Spam) matches the true user intent. |
-| **C2** | Dialect / Pidgin Parsing | Evaluates non-standard/regional language (e.g., West African Pidgin English). Fails only if dialect misinterpretation causes a label error. |
-| **C3** | Urgency Escalation | Verifies critical risk triggers (stuck/lost money, unauthorized charges, prolonged outages). Requires Flag: Yes. |
-| **C4** | Spam Detection | Identifies unsolicited commercial promotion, phishing, or scam messages. |
+> **Data note:** The 50 posts are **synthetic practice data** written for training. They are not real social media data. This is a simulated QC audit, not a production project. No AI model was tested; I audited the labels and priority flags that were already assigned.
 
-### 📐 Baseline Quality Evaluation Metrics
+## What I did
+Acting as QC, I checked each post's assigned label (Complaint, Inquiry, Praise, Spam) and priority flag against six criteria, marked Pass or Fail, and wrote a reason for every Fail.
 
-Based on the 50-post benchmark audit sample (39 Passed / 11 Failed), baseline classification performance metrics are evaluated as follows:
+## Audit checklist
 
-| Metric | Score | Evaluation Focus |
-| :--- | :---: | :--- |
-| **Accuracy** | **78.00%** | Overall correct audit classification rate across all criteria (C1–C6). |
-| **Precision** | **81.82%** | Measures exactness—minimizes false positive failure flags. |
-| **Recall** | **70.00%** | Measures audit coverage—ensures critical failures (C3 urgency, C2 Pidgin) are caught. |
-| **F1 Score** | **75.52%** | Harmonic mean balancing Precision and Recall across edge cases. |
+| ID | Criterion | What it checks |
+|----|-----------|----------------|
+| C1 | Intent label | The label matches the real meaning of the post |
+| C2 | Dialect / Pidgin | Pidgin or mixed-language posts are labelled correctly. Fails only if misreading the dialect caused a wrong label |
+| C3 | Urgency flag | Urgent complaints (money stuck, failed charges, outages) are flagged Yes |
+| C4 | Spam | Spam is labelled Spam |
+| C5 | Ambiguity | Sarcasm or dual-intent posts get a sensible label |
+| C6 | Completeness | Every post has a label |
 
----
+## Results (50 posts)
+Error rate = posts failed ÷ posts audited × 100
 
-### 💡 Model Diagnostics (Underfitting vs. Overfitting)
+- Posts audited: 50
+- Posts with at least one Fail: **11** (**22%**)
 
-* **Underfitting Risk (Recall < 70%):** Prompt guidelines are too broad, leading the model to miss subtle dialect phrasing (West African Pidgin) or implicit sarcasm. 
-  * *Mitigation:* Inject explicit few-shot edge-case examples into model system prompts.
-* **Overfitting Risk:** Occurs if rules over-memorize specific training sample phrases, failing on unseen real-world posts.
-  * *Mitigation:* Maintain independent validation splits and evaluate against fresh, un-audited customer support streams.
+*(Note: Total criteria failures sum to more than 11 because a single post can fail multiple criteria, e.g., Post 24 failed C1, C2, and C3).*
 
-| **C5** | Tone & Disambiguation | Evaluates edge cases such as sarcasm, implicit dissatisfaction, or dual-intent posts. |
-| **C6** | Label Completeness | Verifies that a valid classification label is present. |
+**Fails by criterion**
 
----
+| Criterion | Fails | Failed Posts |
+|-----------|-------|--------------|
+| C1 | 6 | Posts 1, 23, 24, 32, 40, 43 |
+| C2 | 1 | Post 24 |
+| C3 | 6 | Posts 3, 5, 15, 24, 28, 38 |
+| C4 | 3 | Posts 1, 23, 40 |
+| C5 | 1 | Post 32 |
+| C6 | 0 | None |
 
-## 📊 Benchmark Results & Error Analysis
+## Findings
+- **Most common error:** Missed Urgency Escalation Flags (Criterion C3 — 6 of 50 posts failed: Posts 3, 5, 15, 24, 28, 38).
+- **Likely cause:** Annotators consistently omitted `Flag: Yes` on financial losses (missing/stuck refunds, failed debits, agent overcharges) and major service blackouts, despite correctly flagging similar complaints elsewhere (e.g., Posts 37, 46).
+- **Recommendation 1 (High Priority — 6 fails):** Update guidelines to mandate `Flag: Yes` for any post citing lost/stuck funds, unauthorized debits, or prolonged network outages (>24 hours).
+- **Recommendation 2 (Medium Priority — 3 fails):** Clarify spam rules bidirectionally: prevent commercial scams from being misclassified as genuine Inquiries or Praise (Posts 23, 40), and stop valid product price queries from being wrongly tagged as Spam (Post 1).
+- **Recommendation 3 (Lower Priority — 1 fail each):** Add contextual guidelines for sarcasm detection (Post 32) and expand dialect training for West African Pidgin English financial phrases (Post 24).
 
-- **Total Sample Size:** 50 Posts
-- **Passed Audit:** 39 / 50 (78%)
-- **Failed Audit:** 11 / 50 (22%)
+## Limitations
+Synthetic data, one auditor, and a small sample of 50. Results show the method, not real-world error rates.
 
-### Failure Distribution by Criteria
-
-| Criteria | Failure Count | Key Failure Drivers |
-| :--- | :---: | :--- |
-| **C3 (Urgency Escalation)** | 7
-### 💡 Model Diagnostics (Underfitting vs. Overfitting Loop)
-
-* **Underfitting Handling (Improving Recall):**
-  * *Symptom:* Prompt rules are too simple or broad, causing the model to miss subtle edge cases like West African Pidgin English (C2) or implicit urgency flags (C3).
-  * *Optimization:* Inject explicit few-shot edge-case examples into system prompts to train the model on dialect syntax and urgency cues.
-
-* **Overfitting Handling (Ensuring Generalization):**
-  * *Symptom:* High accuracy on the 50 practice sample posts, but performance drops on brand-new, unseen customer support posts because the rules over-memorized specific keywords.
-  * *Optimization:* Keep rules focused on conceptual intent rather than exact string matching, and regularly evaluate against fresh, un-audited dataset splits.
-
-
-
-
+## Files
+- `50_practice_posts_raw.csv`: the 50 practice posts
